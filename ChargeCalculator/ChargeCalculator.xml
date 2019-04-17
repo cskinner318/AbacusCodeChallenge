@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChargeCalculator</name>
+    </assembly>
+    <members>
+        <member name="T:ChargeCalculator.CalculatorMapperProfile">
+            <summary>
+            A class responsible for mapping classes in this project
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.CalculatorMapperProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.CalculatorMapperProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Calculator.ChargeCalculator">
+            <summary>
+            Implementation of the charge calculation
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Calculator.ChargeCalculator.#ctor(ChargeCalculator.Queries.IQueryParkingData,Microsoft.Extensions.Configuration.IConfigurationRoot)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.Calculator.ChargeCalculator"/> class.
+            </summary>
+            <param name="parkingDataQueries">Parking data queries</param>
+            <param name="config">Configuration from appsettings</param>
+        </member>
+        <member name="M:ChargeCalculator.Calculator.ChargeCalculator.CalculateCharge(System.String,System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChargeCalculator.Calculator.ICalculateCharges">
+            <summary>
+            Implementing classes calculate parking charges
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Calculator.ICalculateCharges.CalculateCharge(System.String,System.DateTime)">
+            <summary>
+            Calculate the parking charge
+            </summary>
+            <param name="registrationNumber">The registration number to lookup</param>
+            <param name="exitDateTime">The exit time</param>
+            <returns>The actual charge for the parking period</returns>
+        </member>
+        <member name="T:ChargeCalculator.Commands.RegisterParkingCommand">
+            <summary>
+            Command used to request a parking charge calculation
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Commands.RegisterParkingCommand.EntryDateTime">
+            <summary>
+            Gets or sets the time the parking started
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Commands.RegisterParkingCommand.RegistrationNumber">
+            <summary>
+            Gets or sets the vehicle registration number
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Commands.RegisterParkingCommand.ChargeType">
+            <summary>
+            Gets or sets the type of parking charge
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Enums.ChargeType">
+            <summary>
+            Represents the different types of parking charge
+            </summary>
+        </member>
+        <member name="F:ChargeCalculator.Enums.ChargeType.ShortStay">
+            <summary>
+            Short stay charges
+            </summary>
+        </member>
+        <member name="F:ChargeCalculator.Enums.ChargeType.LongStay">
+            <summary>
+            Long stay charges
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Handlers.CarParkCommandsHandler">
+            <summary>
+            A command handler for <see cref="T:ChargeCalculator.Handlers.IHandleCarParkCommands"/>
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Handlers.CarParkCommandsHandler.#ctor(AutoMapper.IMapper,ChargeCalculator.Repository.ICarParkDAL)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.Handlers.CarParkCommandsHandler"/> class.
+            </summary>
+            <param name="mapper">Automapper</param>
+            <param name="db">Daatabase access layer</param>
+        </member>
+        <member name="M:ChargeCalculator.Handlers.CarParkCommandsHandler.Handle(ChargeCalculator.Commands.RegisterParkingCommand)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChargeCalculator.Handlers.ICommandHandler`1">
+            <summary>
+            Implementing classes provide the logic that enacts a <typeparamref name="TCommand"/>.
+            </summary>
+            <typeparam name="TCommand">The command to be handled.</typeparam>
+        </member>
+        <member name="M:ChargeCalculator.Handlers.ICommandHandler`1.Handle(`0)">
+            <summary>
+            Handles the specified command.
+            </summary>
+            <param name="command">The details required to handle the command.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:ChargeCalculator.Handlers.IHandleCarParkCommands">
+            <summary>
+            Implementing classes define methods for handling the commands related to the car park
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Program">
+            <summary>
+            Main class to run parking charge calcuations
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Program.Main(System.String[])">
+            <summary>
+            Main method
+            </summary>
+            <param name="args">any arguements from console</param>
+        </member>
+        <member name="T:ChargeCalculator.Queries.IQueryParkingData">
+            <summary>
+            Queries used regardingn parking data
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Queries.IQueryParkingData.GetParkingDetails(System.String)">
+            <summary>
+            Gets the parking data for charge calculation
+            </summary>
+            <param name="registrationNumber">The registration number to lookup</param>
+            <returns>The ParkingData for a </returns>
+        </member>
+        <member name="T:ChargeCalculator.Queries.Models.ParkingData">
+            <summary>
+            A model representing the parking data for charge calculation
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Queries.Models.ParkingData.EntryDateTime">
+            <summary>
+            Gets or sets the time the parking started
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Queries.Models.ParkingData.ExitDateTime">
+            <summary>
+            Gets or sets the time the parking ended
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Queries.Models.ParkingData.RegistrationNumber">
+            <summary>
+            Gets or sets the vehicle registration number
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Queries.Models.ParkingData.ChargeType">
+            <summary>
+            Gets or sets the type of parking charge
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Queries.ParkingQueries">
+            <summary>
+            Implements the parking data queries
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Queries.ParkingQueries.#ctor(AutoMapper.IMapper,ChargeCalculator.Repository.ICarParkDAL)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.Queries.ParkingQueries"/> class.
+            </summary>
+            <param name="mapper">Automapper</param>
+            <param name="db">Daatabase access layer</param>
+        </member>
+        <member name="M:ChargeCalculator.Queries.ParkingQueries.GetParkingDetails(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChargeCalculator.Repository.CarParkDAL">
+            <summary>
+            Car Park Data Access Layer
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Repository.CarParkDAL.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.Repository.CarParkDAL"/> class.
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Repository.CarParkDAL.GetParkingDetails(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChargeCalculator.Repository.CarParkDAL.RegisterCarParkingEntry(ChargeCalculator.Repository.Models.ParkingRegistrationDAO)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChargeCalculator.Repository.ICarParkDAL">
+            <summary>
+            Data access layer for the car park data
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Repository.ICarParkDAL.RegisterCarParkingEntry(ChargeCalculator.Repository.Models.ParkingRegistrationDAO)">
+            <summary>
+            Register when a vehicle has entered the car park
+            </summary>
+            <param name="parkingRegistration">The parking registration</param>
+        </member>
+        <member name="M:ChargeCalculator.Repository.ICarParkDAL.GetParkingDetails(System.String)">
+            <summary>
+            Get the details for a registered vehicle
+            </summary>
+            <param name="registrationNumber">The registration number to lookup</param>
+            <returns>A DAO for the registered entry</returns>
+        </member>
+        <member name="T:ChargeCalculator.Repository.Models.ParkingRegistrationDAO">
+            <summary>
+            Data Access Object for Parkin
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Repository.Models.ParkingRegistrationDAO.Id">
+            <summary>
+            Gets or sets the id for lite db
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Repository.Models.ParkingRegistrationDAO.EntryDateTime">
+            <summary>
+            Gets or sets the entry time of a registration
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Repository.Models.ParkingRegistrationDAO.RegistrationNumber">
+            <summary>
+            Gets or sets the registration number
+            </summary>
+        </member>
+        <member name="P:ChargeCalculator.Repository.Models.ParkingRegistrationDAO.ChargeType">
+            <summary>
+            Gets or sets the ChargeType
+            </summary>
+        </member>
+        <member name="T:ChargeCalculator.Startup">
+            <summary>
+            Startup class for DI
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Startup.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:ChargeCalculator.Startup"/> class.
+            </summary>
+        </member>
+        <member name="M:ChargeCalculator.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure DI Services
+            </summary>
+            <param name="services">DI collection services</param>
+        </member>
+    </members>
+</doc>
